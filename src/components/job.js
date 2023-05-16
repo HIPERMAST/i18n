@@ -1,20 +1,27 @@
 import React from "react";
-import { FormattedDate, FormattedNumber } from 'react-intl';
+import { FormattedDate, FormattedNumber, FormattedMessage, useIntl } from 'react-intl';
+
 
 const Job = (props) => {
+
   return (
     <tr>
       <th scope="row">{props.offer.id}</th>
-      <td>{props.offer.name}</td>
-      <td>{props.offer.company}</td>
       <td>
-        <FormattedNumber
-          value={new Number(props.offer.salary)}
-          style="currency"
-          currency="million"
-        />
+        <FormattedMessage id={props.offer.name} defaultMessage={props.offer.name} />
       </td>
-      <td>{props.offer.city}</td>
+      <td>
+        <FormattedMessage id={props.offer.company} defaultMessage={props.offer.company} />
+      </td>
+      <td>
+      <FormattedNumber
+          value={props.offer.salary}
+          style="currency"
+        />{" Millón "} 
+      </td>
+      <td>
+        <FormattedMessage id={props.offer.city} defaultMessage={props.offer.city} />
+      </td>
       <td>
         <FormattedDate
           value={new Date(props.offer.date)}
@@ -23,10 +30,11 @@ const Job = (props) => {
           day='numeric'
           weekday='long'
         />
-      </td>
+      </td>   
       <td>
         <FormattedNumber
           value={props.offer.views}
+          style="decimal"
         />
       </td>
     </tr>
